@@ -7,7 +7,6 @@ import br.com.alterdata.vendas.model.entity.Categoria;
 import br.com.alterdata.vendas.repository.CategoriaRepository;
 import br.com.alterdata.vendas.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,23 +34,17 @@ public class CategoriaService {
         return categoriaRepository.findById(id).orElseThrow(() -> new BusinessException("Categoria não encontrada."));
     }
 
-    protected Categoria obterPorTitulo(String titulo){
-        return categoriaRepository.findByTitulo(titulo).orElse(null);
+    protected Categoria obterPorTitulo(String titulo) {
+        return categoriaRepository.findByTitulo(titulo).orElseThrow(() -> new BusinessException("Categoria não encontrada."));
     }
 
     @Transactional
     public Categoria editar(Long id, CategoriaDTO dto) throws ValidationException {
         if (categoriaRepository.existsById(id)) {
             validarCategoriaDTO(dto);
-            try {
-                Categoria categoria = categoriaMapper.toCategoria(dto);
-                categoria.setId(id);
-                return categoriaRepository.save(categoria);
-            } catch (DataIntegrityViolationException e) {
-                throw new BusinessException("Erro de integridade de dados ao salvar categoria.");
-            } catch (Exception e) {
-                throw new RuntimeException("Erro inesperado ao salvar categoria.");
-            }
+            Categoria categoria = categoriaMapper.toCategoria(dto);
+            categoria.setId(id);
+            return categoriaRepository.save(categoria);
         }
         throw new BusinessException("Categoria não encontrada.");
     }
@@ -59,25 +52,15 @@ public class CategoriaService {
     @Transactional
     public Categoria salvar(CategoriaDTO dto) throws ValidationException {
         validarCategoriaDTO(dto);
-        try {
-            Categoria categoria = categoriaMapper.toCategoria(dto);
-            categoria.setDataCriacao(LocalDate.now());
-            return categoriaRepository.save(categoria);
-        } catch (DataIntegrityViolationException e) {
-            throw new BusinessException("Erro de integridade de dados ao salvar categoria.");
-        } catch (Exception e) {
-            throw new RuntimeException("Erro inesperado ao salvar categoria.");
-        }
+        Categoria categoria = categoriaMapper.toCategoria(dto);
+        categoria.setDataCriacao(LocalDate.now());
+        return categoriaRepository.save(categoria);
     }
 
     @Transactional
     public void deletar(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new BusinessException("Categoria não encontrada."));
-        try {
-            categoriaRepository.delete(categoria);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro inesperado ao deletar categoria.");
-        }
+        Categoria categoria = obterPorId(id);
+        categoriaRepository.delete(categoria);
     }
 
     private void validarCategoriaDTO(CategoriaDTO dto) throws ValidationException {

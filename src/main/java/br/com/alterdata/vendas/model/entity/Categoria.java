@@ -37,9 +37,6 @@ public class Categoria {
     @Column(name = "data_criacao")
     private LocalDate dataCriacao;
 
-    @OneToMany(mappedBy = "categoria")
-    private List<Produto> produtos;
-
     public Long getId() {
         return id;
     }
@@ -78,13 +75,5 @@ public class Categoria {
 
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 }

@@ -14,8 +14,6 @@ public class CategoriaDTO {
 
     private String codigo;
 
-    private List<Produto> produtos;
-
     public String getTitulo() {
         return titulo;
     }
@@ -38,12 +36,5 @@ public class CategoriaDTO {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 }

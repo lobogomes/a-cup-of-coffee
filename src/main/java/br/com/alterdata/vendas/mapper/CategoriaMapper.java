@@ -11,6 +11,5 @@ public interface CategoriaMapper {
     @Mapping(target = "titulo")
     @Mapping(target = "descricao")
     @Mapping(target = "codigo")
-    @Mapping(target = "produtos")
     Categoria toCategoria(CategoriaDTO categoriaDTO);
 }

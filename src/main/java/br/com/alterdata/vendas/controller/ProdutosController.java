@@ -5,6 +5,7 @@ import br.com.alterdata.vendas.service.ProdutoService;
 
 import java.util.List;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ProdutosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody ProdutoDTO dto) throws ValidationException {
+    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody ProdutoDTO dto) throws ValidationException, NotFoundException {
         Produto produto = produtoService.editar(id, dto);
         return ResponseEntity.ok(produto);
     }

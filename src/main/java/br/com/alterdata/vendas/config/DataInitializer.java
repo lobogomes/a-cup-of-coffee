@@ -1,8 +1,6 @@
 package br.com.alterdata.vendas.config;
 
 import br.com.alterdata.vendas.model.entity.Usuario;
-import br.com.alterdata.vendas.repository.CategoriaRepository;
-import br.com.alterdata.vendas.repository.ProdutoRepository;
 import br.com.alterdata.vendas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

@@ -3,17 +3,23 @@ package br.com.alterdata.vendas.service;
 import br.com.alterdata.vendas.exception.BusinessException;
 import br.com.alterdata.vendas.mapper.ProdutoMapper;
 import br.com.alterdata.vendas.model.dto.CategoriaDTO;
+import br.com.alterdata.vendas.model.dto.FiltroDTO;
 import br.com.alterdata.vendas.model.dto.ProdutoDTO;
 import br.com.alterdata.vendas.model.entity.Categoria;
 import br.com.alterdata.vendas.model.entity.Produto;
 import br.com.alterdata.vendas.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.Objects;
+
+import static br.com.alterdata.vendas.specification.ProdutoSpecification.buildSpecification;
 
 @Service
 public class ProdutoService {
@@ -33,6 +39,15 @@ public class ProdutoService {
 
     public Produto obterPorId(Long id) {
         return produtoRepository.findById(id).orElseThrow(() -> new BusinessException("Produto não encontrado."));
+    }
+
+    public List<Produto> obterPorCategoria(String categoria) {
+        return produtoRepository.findByCategoriaTitulo(categoria).orElseThrow(() -> new BusinessException("Produto não encontrado."));
+    }
+
+    public Page<Produto> filtrar(FiltroDTO filtro, Pageable pageable) {
+        Specification<Produto> spec = buildSpecification(filtro);
+        return produtoRepository.findAll(spec, pageable);
     }
 
     @Transactional

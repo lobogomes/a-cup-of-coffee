@@ -27,7 +27,8 @@ public class ListarTodosProdutos {
 
     @Autowired
     private WebApplicationContext webAppContextSetup;
-    @Autowired private EntityManager em;
+    @Autowired
+    private EntityManager em;
 
     @BeforeEach
     void init() {

@@ -24,14 +24,14 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException ex){
-        ErrorResponse errorResponse = new ErrorResponse(400,"Resource error", "Erro de integridade de dados ao salvar recurso.");
+    public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(400, "Resource error", "Erro de integridade de dados ao salvar recurso.");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception ex){
-        ErrorResponse errorResponse = new ErrorResponse(500,"Internal error", ex.getMessage());
+    public ResponseEntity<ErrorResponse> handleException(Exception ex) {
+        ErrorResponse errorResponse = new ErrorResponse(500, "Internal error", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

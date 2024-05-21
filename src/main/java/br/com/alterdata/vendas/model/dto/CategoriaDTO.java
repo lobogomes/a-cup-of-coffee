@@ -1,11 +1,6 @@
 package br.com.alterdata.vendas.model.dto;
 
 
-import br.com.alterdata.vendas.model.entity.Produto;
-
-import java.time.LocalDate;
-import java.util.List;
-
 public class CategoriaDTO {
 
     private String titulo;
@@ -18,20 +13,20 @@ public class CategoriaDTO {
         return titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public void setCodigo(String codigo) {

@@ -1,16 +1,14 @@
 package br.com.alterdata.vendas.model.entity;
 
 import com.sun.istack.NotNull;
-import java.math.BigDecimal;
-import javax.persistence.*;
+import lombok.Data;
 
-import lombok.*;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "produtos")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Produto {
 
     @Id
@@ -37,6 +35,19 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
+    public Produto(Long id, String nome, String descricao, String referencia, BigDecimal valorUnitario, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.referencia = referencia;
+        this.valorUnitario = valorUnitario;
+        this.categoria = categoria;
+    }
+
+    public Produto() {
+
+    }
 
     public Long getId() {
         return id;

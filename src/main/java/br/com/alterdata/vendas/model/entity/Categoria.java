@@ -1,19 +1,14 @@
 package br.com.alterdata.vendas.model.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "categorias")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Categoria {
 
     @Id
@@ -36,6 +31,18 @@ public class Categoria {
     @NotNull
     @Column(name = "data_criacao")
     private LocalDate dataCriacao;
+
+    public Categoria(Long id, String titulo, String descricao, String codigo, LocalDate dataCriacao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.codigo = codigo;
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Categoria() {
+
+    }
 
     public Long getId() {
         return id;

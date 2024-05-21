@@ -5,7 +5,6 @@ import br.com.alterdata.vendas.mapper.CategoriaMapper;
 import br.com.alterdata.vendas.model.dto.CategoriaDTO;
 import br.com.alterdata.vendas.model.entity.Categoria;
 import br.com.alterdata.vendas.repository.CategoriaRepository;
-import br.com.alterdata.vendas.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +20,6 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     @Autowired
-    private ProdutoRepository produtoRepository;
-
-    @Autowired
     private CategoriaMapper categoriaMapper;
 
     public List<Categoria> listar() {
@@ -34,7 +30,7 @@ public class CategoriaService {
         return categoriaRepository.findById(id).orElseThrow(() -> new BusinessException("Categoria não encontrada."));
     }
 
-    protected Categoria obterPorTitulo(String titulo) {
+    public Categoria obterPorTitulo(String titulo) {
         return categoriaRepository.findByTitulo(titulo).orElseThrow(() -> new BusinessException("Categoria não encontrada."));
     }
 

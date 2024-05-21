@@ -5,6 +5,7 @@ import br.com.alterdata.vendas.model.entity.Categoria;
 import br.com.alterdata.vendas.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("categorias")
+@PreAuthorize("hasRole('ADMIN')")
 public class CategoriaController {
 
     @Autowired
@@ -25,6 +27,12 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public ResponseEntity<?> obterPorId(@PathVariable Long id) {
         Categoria categoria = categoriaService.obterPorId(id);
+        return ResponseEntity.ok(categoria);
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<?> obterPorTitulo(@RequestParam String titulo) {
+        Categoria categoria = categoriaService.obterPorTitulo(titulo);
         return ResponseEntity.ok(categoria);
     }
 

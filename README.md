@@ -127,7 +127,6 @@ The following tools were used to build the project:
 
 ---
 
-## 🦸 Author
 <a href="https://github.com/lobogomes">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/111708856?v=4" width="100px;" alt="Amanda Lobo"/>
 
